@@ -7,16 +7,6 @@ var uuid = require('node-uuid');
 
 //Server
 
-app.get('/', function(req, res){
-	res.sendfile('models/test_chat.html');
-});
-app.get('/uuid.js', function(req, res){
-	res.sendfile('bower_components/node-uuid/uuid.js');
-});
-app.get('/messenger.js', function(req, res){
-	res.sendfile('models/messenger.js');
-});
-
 io.on('connection', function(socket){	
 	//Message Types
 	socket.on('join', function(msg) {
