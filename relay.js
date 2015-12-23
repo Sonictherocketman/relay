@@ -8,14 +8,12 @@ var uuid = require('node-uuid');
 //Server
 
 io.on('connection', function(socket){	
-	//Message Types
 	socket.on('join', function(msg) {
-		//Join room if exists.
 		socket.join(msg.roomId);
 		io.to(msg.roomId).emit('system', 'yay, welcome');
 	});
 	socket.on('leave', function(msg) {
-		//Leave room and clean up if last member.
+		socket.leave(msg.roomId);
 	});
 	socket.on('system', function(msg) {
 		console.log('system', msg);
@@ -28,9 +26,6 @@ io.on('connection', function(socket){
 	socket.on('data', function(msg) {
 		console.log('data', msg);
 		io.to(msg.roomId).emit('data', msg);
-	});
-	socket.on('disconnect', function() {
-		//Do cleanup and room maintenance.
 	});
 });
 
